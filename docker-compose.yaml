@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  avito-shop-service:
+    build: .
+    container_name: avito-shop-service
+    ports:
+      - "8080:8080"
+    environment:
+      # енвы подключения к БД
+      - DB_USER=postgres
+      - DB_PASSWORD=aD7fK3lZ9q
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=shop
+      - DB_SSLMODE=disable
+      # порт сервиса 5432
+      - SERVER_ADDR=:8080
+      # секретные ключ для jwt
+      - SECRET_KEY=testkey
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal
+
+  db:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: aD7fK3lZ9q
+      POSTGRES_DB: shop
+    volumes:
+      # "./migrations/init.sql" - путь к миграциям БД
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5454:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d shop'"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - internal
+networks:
+  internal:

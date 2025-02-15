@@ -1,0 +1,107 @@
+# golangci-lint configuration file made by @ccoVeille
+# Source: https://github.com/ccoVeille/golangci-lint-config-examples/
+# Author: @ccoVeille
+# License: MIT
+# Variant: 03-safe
+# Version: v1.0.0
+#
+run:
+  timeout: 5m
+linters:
+  # некоторые линтеры включены по умолчанию
+  # https://golangci-lint.run/usage/linters/
+  #
+  # включить некоторые дополнительные линтеры
+  enable:
+    - errcheck
+
+    - gosimple
+
+    - govet
+
+    - ineffassign
+
+    - staticcheck
+
+    - revive
+
+    - gci
+
+    - thelper
+
+    - mirror
+
+    - usestdlibvars
+
+    # Finds commonly misspelled English words.
+    - misspell
+
+    - dupword
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - localmodule
+
+  revive:
+    rules:
+      - name: blank-imports
+
+      - name: context-as-argument
+        arguments:
+          - allowTypesBefore: "*testing.T"
+
+      - name: context-keys-type
+
+      - name: dot-imports
+
+      - name: empty-block
+
+      - name: error-naming
+
+      - name: error-return
+
+      - name: error-strings
+
+      - name: errorf
+
+      - name: increment-decrement
+
+      - name: indent-error-flow
+
+      - name: range
+
+      - name: receiver-naming
+
+      - name: redefines-builtin-id
+
+      - name: superfluous-else
+
+      - name: time-naming
+
+      - name: unexported-return
+
+      - name: unreachable-code
+
+      - name: unused-parameter
+
+      - name: var-declaration
+
+      - name: var-naming
+
+  dupword:
+    ignore:
+    #  - "blah" # this will accept "blah blah …" as a valid duplicate word
+
+  misspell:
+    locale: US
+
+    ignore-words:
+    #  - valor
+    #  - and
+
+    extra-words:
+    #  - typo: "whattever"
+    #    correction: "whatever"
