@@ -4,6 +4,11 @@
 ## Быстрый звапуск через docker
 для запуска подготовлены файлы [Dockerfile](Dockerfile) и [docker-compose.yml](docker-compose.yaml)
 просто выполните команду 
+Для сборки
+```bash
+docker-compose build
+````
+Для запуска
 ```bash
 docker-compose up -d
 ```
